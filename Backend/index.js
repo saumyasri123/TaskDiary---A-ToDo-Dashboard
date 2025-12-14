@@ -8,10 +8,16 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",       
+    "https://FRONTEND.vercel.app"
+  ],
+  credentials: true
+}));
 
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || "secret123";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // --------- Mongo Connect ----------
 mongoose.connect(process.env.MONGO_URI)
