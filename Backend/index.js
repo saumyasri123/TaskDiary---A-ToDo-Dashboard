@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: [
-    "http://localhost:5173",       
+    "http://localhost:5173",
     "https://task-diary-a-to-do-dashboard.vercel.app"
   ],
   credentials: true
@@ -67,9 +67,14 @@ app.post("/signup", async (req, res) => {
     const user = await User.create({ name, email, password: hashed });
     res.json({ msg: "User created", user: { id: user._id, name: user.name, email: user.email } });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
+    console.error("AUTH ERROR:", err);
+    res.status(500).json({
+      error: err.message,
+      name: err.name,
+      code: err.code
+    });
   }
+
 });
 
 // Login
@@ -84,9 +89,14 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: "8h" });
     res.json({ token });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
+    console.error("AUTH ERROR:", err);
+    res.status(500).json({
+      error: err.message,
+      name: err.name,
+      code: err.code
+    });
   }
+
 });
 
 // Get profile
