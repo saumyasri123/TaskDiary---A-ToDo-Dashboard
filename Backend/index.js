@@ -19,10 +19,26 @@ app.use(cors({
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET;
 
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET not set");
+}
+
 // --------- Mongo Connect ----------
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Mongo connected"))
-  .catch(err => console.log("Mongo connect err:", err));
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    console.log("Mongo connected");
+
+    app.listen(PORT, () => {
+      console.log(`Backend running on ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to connect MongoDB", err);
+    process.exit(1); // crash if DB is not connected
+  }
+};
 
 // --------- Schemas ----------
 const UserSchema = new mongoose.Schema({
@@ -155,4 +171,4 @@ app.delete("/tasks/:id", auth, async (req, res) => {
 });
 
 // Start
-app.listen(PORT, () => console.log(`Backend running on ${PORT}`));
+startServer();
