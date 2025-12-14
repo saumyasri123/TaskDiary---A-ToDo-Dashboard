@@ -2,7 +2,7 @@
 
 > A modern, beautiful, and intuitive task management dashboard tailored for personal productivity.
 
-![TaskDiary Banner](image-3.png)
+![TaskDiary Banner](Frontend/src/assets/image-3.png)
 
 **TaskDiary** is a full-stack web application designed to help users track their daily tasks with style. Featuring a stunning glassmorphism UI, real-time analytics, and seamless animations, it transforms the mundane task of "to-do" listing into a delightful experience.
 
@@ -71,7 +71,7 @@ Follow these steps to set up the project locally.
 
 | Login Page | Dashboard |
 |------------|-----------|
-| ![login](image.png) | ![dashboard](image-1.png) |
+| ![login](Frontend/src/assets/image.png) | ![dashboard](Frontend/src/assets/image-1.png) |
 
 ## 🤝 Contributing
 
