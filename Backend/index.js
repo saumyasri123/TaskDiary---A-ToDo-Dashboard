@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:5173",       
-    "https://FRONTEND.vercel.app"
+    "https://task-diary-a-to-do-dashboard.vercel.app"
   ],
   credentials: true
 }));
